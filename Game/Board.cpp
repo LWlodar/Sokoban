@@ -8,6 +8,18 @@ Board::Board()
 {
 }
 
+Board::Board(Board* board) :
+	Width(board->Width), Height(board->Height)
+{
+	_cells = new char*[Height];
+	for (int i=0; i<Height; i++)
+	{
+		_cells[i] = new char[Width];
+		for (int j=0; j<Width; j++)
+			_cells[i][j] = (*board)[i][j];
+	}
+}
+
 Board::Board(int width, int height) :
 	Width(width), Height(height)
 {

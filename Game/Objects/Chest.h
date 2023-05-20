@@ -27,7 +27,20 @@ namespace Game
 
 	#pragma endregion | Public members |
 
-		Chest(int y, int x, Type type);
+		Chest(int y=0, int x=0, Type type=Treasure);
+		Chest& operator=(const Chest& c)
+		{
+			if (this == &c)
+				return *this;
+			Object::_x = c._x;
+			Object::_y = c._y;
+			_type = c._type;
+			return *this;
+		}
+		bool operator==(const Type type)
+		{
+			return _type == type;
+		}
 
 		MoveEffect Move(Direction direction, Board* board);
 

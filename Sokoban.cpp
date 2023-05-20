@@ -2,14 +2,15 @@
 //
 
 #include <iostream>
-#include "Console.h"
-#include "Core.h"
+#include "System/Console.h"
+#include "System/Levelfiles.h"
+#include "Game/Core.h"
 
 int main()
 {
     // initialize the console/"GUI"
     System::Console::GetInstance()->SetTitle("Sokoban");
-
+    System::Levelfiles::LoadLevel("level1.txt");
     Game::Core::StartGame();
 
     // free memory

@@ -1,9 +1,9 @@
-#include <iostream>
 #include <conio.h>
+#include <iostream>
 #include "Core.h"
-#include "Console.h"
+#include "../System/Console.h"
 
-#define board (*_board)
+#define p_board (*_board)
 
 using namespace Game;
 
@@ -14,7 +14,7 @@ void Core::DrawBoard(void)
 	for (int i=0; i<_board->Height; i++)
 	{
 		for (int j=0; j<_board->Width; j++)
-			std::cout << board[i][j];
+			std::cout << p_board[i][j];
 		std::cout << '\n';
 	}
 }
@@ -81,37 +81,37 @@ void Core::SelectWorker(char type)
 
 Core::Core(void)
 {
-	_workers = new Worker[3]
-	{
-		Worker(3,3,-2), Worker(8,9), Worker(9,9,1,5)
-	};
-	_chests = new Chest[3]
-	{
-		Chest(10,10, Chest::Type::Treasure), Chest(10,9, Chest::Type::Treasure), Chest(3,4, Chest::Type::Fragile)
-	};
-	_treasuresNum = 2;
-	_chestsNum = 3;
-	_workersNum = 3;
-	_board = new Board(25, 25);
-	//_board.Cells = new char*[_board.Height];
-	for (int i=0; i<_board->Height; i++)
-	{
-		//_board.Cells[i] = new char[_board.Width];
-		for (int j=0; j<_board->Width; j++)
-		{
-			board[i][j] = ' ';
-			if (i == 0 || j == 0 || i == _board->Height-1 || j == _board->Width-1)
-				board[i][j] = WALL;
-		}
-	}
-	board[3][3] = LIFTER;
-	board[8][9] = WORKER;
-	board[9][9] = OMNI;
-	board[10][9] = TREASURE;
-	board[10][10] = TREASURE;
-	board[3][4] = FRAGILE;
-	board[10][11] = EXIT;
-	_selectedWorker = 0;
+	//_workers = new Worker[3]
+	//{
+	//	Worker(3,3,-2), Worker(8,9), Worker(9,9,1,5)
+	//};
+	//_chests = new Chest[3]
+	//{
+	//	Chest(10,10, Chest::Type::Treasure), Chest(10,9, Chest::Type::Treasure), Chest(3,4, Chest::Type::Fragile)
+	//};
+	//_treasuresNum = 2;
+	//_chestsNum = 3;
+	//_workersNum = 3;
+	//_board = new Board(25, 25);
+	////_board.Cells = new char*[_board.Height];
+	//for (int i=0; i<_board->Height; i++)
+	//{
+	//	//_board.Cells[i] = new char[_board.Width];
+	//	for (int j=0; j<_board->Width; j++)
+	//	{
+	//		p_board[i][j] = ' ';
+	//		if (i == 0 || j == 0 || i == _board->Height-1 || j == _board->Width-1)
+	//			p_board[i][j] = WALL;
+	//	}
+	//}
+	//p_board[3][3] = LIFTER;
+	//p_board[8][9] = WORKER;
+	//p_board[9][9] = OMNI;
+	//p_board[10][9] = TREASURE;
+	//p_board[10][10] = TREASURE;
+	//p_board[3][4] = FRAGILE;
+	//p_board[10][11] = EXIT;
+	//_selectedWorker = 0;
 
 } // end of: Core::Core(void)
 
@@ -136,8 +136,29 @@ Core* Core::GetInstance(void)
 
 void Core::ResetInstance(void)
 {
-	delete _instance;
+	if (_instance != nullptr)
+		delete _instance;
 	_instance = nullptr;
+}
+
+void Core::ResetInstance(Board* board, int workersNum, Worker workers[],
+	int chestsNum, Chest chests[])
+{
+	ResetInstance();
+	_instance = new Core();
+	_instance->_board = board;
+	_instance->_workersNum = workersNum;
+	_instance->_workers = new Worker[workersNum];
+	for (int i=0; i<workersNum; i++)
+		_instance->_workers[i] = workers[i];
+	_instance->_chestsNum = chestsNum;
+	_instance->_chests = new Chest[chestsNum];
+	for (int i=0; i<chestsNum; i++)
+	{
+		_instance->_chests[i] = chests[i];
+		if (_instance->_chests[i] == Chest::Treasure)
+			_instance->_treasuresNum++;
+	}
 }
 
 void Core::PrintHelp(void)

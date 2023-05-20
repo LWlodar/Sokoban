@@ -31,51 +31,66 @@
     <Filter Include="Source Files\Game\Objects">
       <UniqueIdentifier>{976ef38b-88f2-4d2c-b120-da55124d8d3c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Level files">
+      <UniqueIdentifier>{1084ec3e-c436-45e7-96d6-44495eadc4c5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Sokoban.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Console.cpp">
+    <ClCompile Include="Game\Board.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Core.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="System\Console.cpp">
       <Filter>Source Files\System</Filter>
     </ClCompile>
-    <ClCompile Include="Core.cpp">
-      <Filter>Source Files\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Board.cpp">
-      <Filter>Source Files\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Worker.cpp">
+    <ClCompile Include="Game\Objects\Chest.cpp">
       <Filter>Source Files\Game\Objects</Filter>
     </ClCompile>
-    <ClCompile Include="Object.cpp">
+    <ClCompile Include="Game\Objects\Object.cpp">
       <Filter>Source Files\Game\Objects</Filter>
     </ClCompile>
-    <ClCompile Include="Chest.cpp">
+    <ClCompile Include="Game\Objects\Worker.cpp">
       <Filter>Source Files\Game\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="System\Levelfiles.cpp">
+      <Filter>Source Files\System</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Console.h">
+    <ClInclude Include="Game\Basics.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Board.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Core.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Objects\Chest.h">
+      <Filter>Header Files\Game\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Objects\Object.h">
+      <Filter>Header Files\Game\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Objects\Worker.h">
+      <Filter>Header Files\Game\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="System\Console.h">
       <Filter>Header Files\System</Filter>
     </ClInclude>
-    <ClInclude Include="Core.h">
-      <Filter>Header Files\Game</Filter>
+    <ClInclude Include="System\Levelfiles.h">
+      <Filter>Header Files\System</Filter>
     </ClInclude>
-    <ClInclude Include="Basics.h">
-      <Filter>Header Files\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Board.h">
-      <Filter>Header Files\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Worker.h">
-      <Filter>Header Files\Game\Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="Object.h">
-      <Filter>Header Files\Game\Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="Chest.h">
-      <Filter>Header Files\Game\Objects</Filter>
-    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="level1.txt" />
+    <Text Include="Level files\level1.txt">
+      <Filter>Level files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

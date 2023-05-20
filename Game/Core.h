@@ -1,7 +1,7 @@
 #pragma once
 #include "Board.h"
-#include "Worker.h"
-#include "Chest.h"
+#include "Objects/Worker.h"
+#include "Objects/Chest.h"
 
 /// <summary>
 /// Game classes.
@@ -9,18 +9,10 @@
 namespace Game
 {
 	/// <summary>
-	/// 
+	/// Main class of the game.
 	/// </summary>
 	class Core
 	{
-	private:
-		//struct Board
-		//{
-		//	char** Cells;
-		//	int Width;
-		//	int Height;
-		//};
-
 	#pragma region | Private members |
 
 		/// <summary>
@@ -50,7 +42,14 @@ namespace Game
 	#pragma endregion | Private methods |
 
 	public:
+		/// <summary>
+		/// Default constructor.
+		/// </summary>
 		Core(void);
+
+		/// <summary>
+		/// Default destructor.
+		/// </summary>
 		~Core(void);
 
 	#pragma region | Public methods |
@@ -70,6 +69,13 @@ namespace Game
 		/// Reset (clear the memory) the only instance of the class.
 		/// </summary>
 		static void ResetInstance(void);
+
+		/// <summary>
+		/// Reset (clear the memory) the only instance of the class.<para/>
+		/// Create a new one with the given values.
+		/// </summary>
+		static void ResetInstance(Board* board, int workersNum, Worker workers[],
+			int chestsNum, Chest chests[]);
 
 		/// <summary>
 		/// Starts the game.

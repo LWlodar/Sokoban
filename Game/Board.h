@@ -13,6 +13,7 @@ namespace Game
 
 	public:
 		Board();
+		Board(Board* board);
 		Board(int width, int height);
 		Board(char** cells, int width, int height);
 		~Board();

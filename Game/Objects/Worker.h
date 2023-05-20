@@ -1,6 +1,6 @@
 #pragma once
-#include "Basics.h"
-#include "Board.h"
+#include "../Basics.h"
+#include "../Board.h"
 #include "Object.h"
 #include "Chest.h"
 
@@ -46,7 +46,19 @@ namespace Game
 		/// <param name="x">Column in which the worker stands.</param>
 		/// <param name="dynamites">Number of dynamites (used by Omni and Sapper).</param>
 		/// <param name="energy">Number of energy (used only by Omni).</param>
-		Worker(int y, int x, int dynamites = -1, int energy = -1);
+		Worker(int y=0, int x=0, int dynamites = -1, int energy = -1);
+		Worker(const Worker&) = default;
+		Worker& operator=(const Worker& w)
+		{
+			if (this == &w)
+				return *this;
+			Object::_x = w._x;
+			Object::_y = w._y;
+			_dynamites = w._dynamites;
+			_energy = w._energy;
+
+			return *this;
+		}
 
 		/// <summary>
 		/// Move the worker to the specified <see cref="Direction"/> on the <see cref="Board"/>.

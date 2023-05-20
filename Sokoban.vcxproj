@@ -104,6 +104,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -127,22 +128,28 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Board.cpp" />
-    <ClCompile Include="Chest.cpp" />
-    <ClCompile Include="Console.cpp" />
-    <ClCompile Include="Core.cpp" />
-    <ClCompile Include="Object.cpp" />
+    <ClCompile Include="Game\Board.cpp" />
+    <ClCompile Include="Game\Core.cpp" />
+    <ClCompile Include="Game\Objects\Chest.cpp" />
+    <ClCompile Include="Game\Objects\Object.cpp" />
+    <ClCompile Include="Game\Objects\Worker.cpp" />
     <ClCompile Include="Sokoban.cpp" />
-    <ClCompile Include="Worker.cpp" />
+    <ClCompile Include="System\Console.cpp" />
+    <ClCompile Include="System\Levelfiles.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Basics.h" />
-    <ClInclude Include="Board.h" />
-    <ClInclude Include="Chest.h" />
-    <ClInclude Include="Console.h" />
-    <ClInclude Include="Core.h" />
-    <ClInclude Include="Object.h" />
-    <ClInclude Include="Worker.h" />
+    <ClInclude Include="Game\Basics.h" />
+    <ClInclude Include="Game\Board.h" />
+    <ClInclude Include="Game\Core.h" />
+    <ClInclude Include="Game\Objects\Chest.h" />
+    <ClInclude Include="Game\Objects\Object.h" />
+    <ClInclude Include="Game\Objects\Worker.h" />
+    <ClInclude Include="System\Console.h" />
+    <ClInclude Include="System\Levelfiles.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Level files\level1.txt" />
+    <Text Include="level1.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

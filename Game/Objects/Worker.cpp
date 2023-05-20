@@ -1,4 +1,5 @@
 #include <iostream>
+#include <conio.h>
 #include "Worker.h"
 
 using namespace Game;
@@ -36,7 +37,7 @@ MoveEffect Worker::Move(Direction direction, Board* board, Chest* chests)
 	switch ((*board)[y][x])
 	{
 	case FRAGILE:
-		if (Dynamites != -2)
+		if (Dynamites == -1)
 			return NotCompatibileChest;
 		chest = true;
 		break;
@@ -49,15 +50,17 @@ MoveEffect Worker::Move(Direction direction, Board* board, Chest* chests)
 				return NoDynamitesOmni;
 			return NoDynamites;
 		}
-	case WHEELED:
+		break;
 	case TREASURE:
 		// lifter and sapper can do nothing with treasure chest
 		if (Dynamites == -2 || (Dynamites >= 0 && Energy < 0))
 			return NotCompatibileChest;
+		[[fallthrough]];
+	case WHEELED:
 		chest = true;
 		break;
 	}
-	MoveEffect chestmove;
+	MoveEffect chestmove = Success;
 	if (chest)
 	{
 		char c = (*board)[y][x];
@@ -65,6 +68,26 @@ MoveEffect Worker::Move(Direction direction, Board* board, Chest* chests)
 		{
 			if (chests[i].X == x && chests[i].Y == y)
 			{
+				if (Dynamites > 0)
+				{
+					std::cout << "\nWhat do You want to do with this crate?\n" <<
+						"Press \'d\' to destroy" << (Energy > 0 ? ", \'m\' to move" : "") <<
+						" or \'0\' to do nothing\n";
+					switch (_getch())
+					{
+					case 'd':
+						(*board)[y][x] = ' ';
+						Object::Move(direction, board);//?
+						if (Energy > 0)
+							_energy--;
+						return (Energy >= 0 ? CrateDestroyedOmni : CrateDestroyed);
+					case 'm':
+						break;
+					case '0':
+						return Success;
+					}
+					break;
+				}
 				chestmove = chests[i].Move(direction, board);
 				if (c == TREASURE && chestmove == CrateDestroyed)
 				{
