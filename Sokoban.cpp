@@ -3,14 +3,14 @@
 
 #include <iostream>
 #include "System/Console.h"
-#include "System/Levelfiles.h"
+#include "System/Files.h"
 #include "Game/Core.h"
 
 int main()
 {
     // initialize the console/"GUI"
     System::Console::GetInstance()->SetTitle("Sokoban");
-    System::Levelfiles::LoadLevel("level1.txt");
+    System::Files::LoadLevel("level1.txt");
     Game::Core::StartGame();
 
     // free memory

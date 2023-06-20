@@ -1,4 +1,4 @@
-#include "Levelfiles.h"
+#include "Files.h"
 #include "../Game/Objects/Worker.h"
 #include <cstdio>
 #include <filesystem>
@@ -8,7 +8,7 @@
 
 using namespace System;
 
-void Levelfiles::LoadLevel(const char* filename)
+void Files::LoadLevel(const char* filename)
 {
 	std::fstream file;
 	file.open((std::filesystem::current_path().string()+"\\Level files\\"+filename).c_str(), std::ios::in);
@@ -35,15 +35,13 @@ void Levelfiles::LoadLevel(const char* filename)
 			board[0][i] = '#';
 		for (int i=1; i<boardHeight-1; i++)
 		{
-			j=1;
+			//j=1;
 			board[i][0] = '#';
 			file >> c;
-			while (true)
+			for (int j=1; j<boardWidth-1; j++)
 			{
 				if (c == '.')
 					board[i][j] = ' ';
-				else if (c == '#')
-					break;
 				else
 				{
 					board[i][j] = c;
@@ -87,10 +85,11 @@ void Levelfiles::LoadLevel(const char* filename)
 							break;
 						}
 				}
-				file >> c;
-				j++;
+				if (j < boardWidth-2)
+					file >> c;
 			}
-			board[i][j] = '#';
+			//board[i][j] = '#';
+			board[i][boardWidth-1] = '#';
 		}
 		for (int i=0; i<boardWidth; i++)
 			board[boardHeight-1][i] = '#';
@@ -101,4 +100,5 @@ void Levelfiles::LoadLevel(const char* filename)
 		delete[] board;
 		file.close();
 	}
-}
+
+} // end of: void Files::LoadLevel(const char* filename)

@@ -1,5 +1,7 @@
 #include <iostream>
+#include <string>
 #include <conio.h>
+#include "../../System/Console.h"
 #include "Worker.h"
 
 using namespace Game;
@@ -32,7 +34,7 @@ MoveEffect Worker::Move(Direction direction, Board* board, Chest* chests)
 		break;
 	}
 
-	// check if new coordinates is a usable chest, if yes, move it
+	// check if new coordinates is a usable chest, if yes, "use" it
 	bool chest = false;
 	switch ((*board)[y][x])
 	{
@@ -60,6 +62,8 @@ MoveEffect Worker::Move(Direction direction, Board* board, Chest* chests)
 		chest = true;
 		break;
 	}
+	// show info about the worker
+	std::string title = "Selected worker: ";
 	MoveEffect chestmove = Success;
 	if (chest)
 	{
@@ -71,22 +75,39 @@ MoveEffect Worker::Move(Direction direction, Board* board, Chest* chests)
 				if (Dynamites > 0)
 				{
 					std::cout << "\nWhat do You want to do with this crate?\n" <<
-						"Press \'d\' to destroy" << (Energy > 0 ? ", \'m\' to move" : "") <<
-						" or \'0\' to do nothing\n";
-					switch (_getch())
+						"Press:\n" <<
+						((*board)[y][x] == TREASURE ? "" : "\'d\' to destroy,\n") <<
+						(Energy > 0 ? "\'m\' to move,\n" : "") <<
+						"\'0\' to do nothing\n";
+					while (true)
 					{
-					case 'd':
-						(*board)[y][x] = ' ';
-						Object::Move(direction, board);//?
-						if (Energy > 0)
-							_energy--;
-						return (Energy >= 0 ? CrateDestroyedOmni : CrateDestroyed);
-					case 'm':
+						switch (_getch())
+						{
+						case 'd':
+							if ((*board)[y][x] == TREASURE)
+								continue;
+							(*board)[y][x] = ' ';
+							Object::Move(direction, board);
+							_dynamites--;
+							if (Energy > 0)
+								_energy--;
+							// show info about the worker
+							if (Energy > 0)
+								title += "Omni: Energy["+std::to_string(Energy)+"] Dynamites["+std::to_string(Dynamites)+"]";
+							else if (Dynamites > 0 && Energy < 0)
+								title += "Sapper: Dynamites["+std::to_string(Dynamites)+"]";
+							title += " (x="+std::to_string(x)+",y="+std::to_string(y)+")";
+							System::Console::GetInstance()->SetTitle(title.c_str());
+							return (Energy >= 0 ? CrateDestroyedOmni : CrateDestroyed);
+						case '0':
+							return Success;
+						case 'm':
+							break;
+						default:
+							continue;
+						}
 						break;
-					case '0':
-						return Success;
 					}
-					break;
 				}
 				chestmove = chests[i].Move(direction, board);
 				if (c == TREASURE && chestmove == CrateDestroyed)
@@ -104,6 +125,17 @@ MoveEffect Worker::Move(Direction direction, Board* board, Chest* chests)
 	Object::Move(direction, board);
 	if (Energy > 0)
 		_energy--;
+	// show info about the worker
+	if (Energy > 0)
+		title += "Omni: Energy["+std::to_string(Energy)+"] Dynamites["+std::to_string(Dynamites)+"]";
+	else if (Dynamites == -1)
+		title += "Worker";
+	else if (Dynamites == -2)
+		title += "Lifter";
+	else if (Dynamites > 0 && Energy < 0)
+		title += "Sapper: Dynamites["+std::to_string(Dynamites)+"]";
+	title += " (x="+std::to_string(x)+",y="+std::to_string(y)+")";
+	System::Console::GetInstance()->SetTitle(title.c_str());
 	return chest ? chestmove : Success;
 
 } // end of: MoveEffect Worker::Move(Direction direction, Board* board, Chest* chests)

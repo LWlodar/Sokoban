@@ -2,6 +2,7 @@
 #include <iostream>
 #include "Core.h"
 #include "../System/Console.h"
+#include <string>
 
 #define p_board (*_board)
 
@@ -11,12 +12,7 @@ Core* Core::_instance = nullptr;
 
 void Core::DrawBoard(void)
 {
-	for (int i=0; i<_board->Height; i++)
-	{
-		for (int j=0; j<_board->Width; j++)
-			std::cout << p_board[i][j];
-		std::cout << '\n';
-	}
+	System::Console::DrawBoard(_instance->_board);
 }
 
 void Core::SelectWorker(char type)
@@ -76,6 +72,17 @@ void Core::SelectWorker(char type)
 			return;
 		_selectedWorker = indices[j];
 	}
+	std::string title = "Selected worker: ";
+	if (_workers[_selectedWorker].Energy > 0)
+		title += "Omni: Energy["+std::to_string(_workers[_selectedWorker].Energy)+"] Dynamites["+std::to_string(_workers[_selectedWorker].Dynamites)+"]";
+	else if (_workers[_selectedWorker].Dynamites == -1)
+		title += "Worker";
+	else if (_workers[_selectedWorker].Dynamites == -2)
+		title += "Lifter";
+	else if (_workers[_selectedWorker].Dynamites > 0 && _workers[_selectedWorker].Energy < 0)
+		title += "Sapper: Dynamites["+std::to_string(_workers[_selectedWorker].Dynamites)+"]";
+	title += " (x="+std::to_string(_workers[_selectedWorker].X)+",y="+std::to_string(_workers[_selectedWorker].Y)+")";
+	System::Console::GetInstance()->SetTitle(title.c_str());
 
 } // end of: void Core::SelectWorker(char type)
 

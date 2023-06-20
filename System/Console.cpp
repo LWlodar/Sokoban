@@ -1,4 +1,6 @@
 #include "Console.h"
+#include "../Game/Board.h"
+#include <iostream>
 
 /*
 * for system("color ...");
@@ -147,3 +149,13 @@ void Console::Clear(void)
 	SetConsoleCursorPosition(console->_screen, start);
 
 } // end of: void Console::Clear(void)
+
+void System::Console::DrawBoard(Game::Board* board)
+{
+	for (int i=0; i<board->Height; i++)
+	{
+		for (int j=0; j<board->Width; j++)
+			std::cout << (*board)[i][j];
+		std::cout << '\n';
+	}
+}

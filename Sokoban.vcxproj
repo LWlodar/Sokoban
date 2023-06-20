@@ -135,7 +135,7 @@
     <ClCompile Include="Game\Objects\Worker.cpp" />
     <ClCompile Include="Sokoban.cpp" />
     <ClCompile Include="System\Console.cpp" />
-    <ClCompile Include="System\Levelfiles.cpp" />
+    <ClCompile Include="System\Files.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Basics.h" />
@@ -145,7 +145,7 @@
     <ClInclude Include="Game\Objects\Object.h" />
     <ClInclude Include="Game\Objects\Worker.h" />
     <ClInclude Include="System\Console.h" />
-    <ClInclude Include="System\Levelfiles.h" />
+    <ClInclude Include="System\Files.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Level files\level1.txt" />

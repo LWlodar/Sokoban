@@ -1,6 +1,7 @@
 #pragma once
 
 #include <Windows.h>
+#include "../Game/Board.h"
 
 namespace System
 {
@@ -96,6 +97,12 @@ namespace System
 		/// Clears the console.
 		/// </summary>
 		static void Clear(void);
+
+		/// <summary>
+		/// Draws the board.
+		/// </summary>
+		/// <param name="board">Pointer to the game's board to draw.</param>
+		static void DrawBoard(Game::Board* board);
 
 		/// <summary>
 		/// Prints a string starting from cursor postition.
