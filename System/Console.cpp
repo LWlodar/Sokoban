@@ -48,7 +48,7 @@ Console::Console()
 
 	//SetTextColor(Red | Green | Blue);
 	//SetBackgroundColor(0);
-}
+} // end of: Console::Console()
 
 void Console::SetFont(const wchar_t* font, int size)
 {
@@ -61,20 +61,20 @@ void Console::SetFont(const wchar_t* font, int size)
 	finfo.FontWeight = FW_NORMAL;
 	wcscpy_s(finfo.FaceName, font);
 	SetCurrentConsoleFontEx(GetInstance()->_screen, FALSE, &finfo);
-}
+} // end of: void Console::SetFont(const wchar_t* font, int size)
 
 Console* Console::GetInstance(void)
 {
 	if (_instance == nullptr)
 		_instance = new Console();
 	return _instance;
-}
+} // end of: Console* Console::GetInstance(void)
 
 void Console::ResetInstance(void)
 {
 	delete _instance;
 	_instance = nullptr;
-}
+} // end of: void Console::ResetInstance(void)
 
 void Console::SetBackgroundColor(WORD color)
 {
@@ -158,4 +158,4 @@ void System::Console::DrawBoard(Game::Board* board)
 			std::cout << (*board)[i][j];
 		std::cout << '\n';
 	}
-}
+} // end of: void System::Console::DrawBoard(Game::Board* board)

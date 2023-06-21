@@ -88,38 +88,6 @@ void Core::SelectWorker(char type)
 
 Core::Core(void)
 {
-	//_workers = new Worker[3]
-	//{
-	//	Worker(3,3,-2), Worker(8,9), Worker(9,9,1,5)
-	//};
-	//_chests = new Chest[3]
-	//{
-	//	Chest(10,10, Chest::Type::Treasure), Chest(10,9, Chest::Type::Treasure), Chest(3,4, Chest::Type::Fragile)
-	//};
-	//_treasuresNum = 2;
-	//_chestsNum = 3;
-	//_workersNum = 3;
-	//_board = new Board(25, 25);
-	////_board.Cells = new char*[_board.Height];
-	//for (int i=0; i<_board->Height; i++)
-	//{
-	//	//_board.Cells[i] = new char[_board.Width];
-	//	for (int j=0; j<_board->Width; j++)
-	//	{
-	//		p_board[i][j] = ' ';
-	//		if (i == 0 || j == 0 || i == _board->Height-1 || j == _board->Width-1)
-	//			p_board[i][j] = WALL;
-	//	}
-	//}
-	//p_board[3][3] = LIFTER;
-	//p_board[8][9] = WORKER;
-	//p_board[9][9] = OMNI;
-	//p_board[10][9] = TREASURE;
-	//p_board[10][10] = TREASURE;
-	//p_board[3][4] = FRAGILE;
-	//p_board[10][11] = EXIT;
-	//_selectedWorker = 0;
-
 } // end of: Core::Core(void)
 
 Core::~Core(void)
@@ -127,9 +95,6 @@ Core::~Core(void)
 	delete _board;
 	delete[] _workers;
 	delete[] _chests;
-	//for (int i=0; i<_board.Height; i++)
-	//	delete _board.Cells[i];
-	//delete[] _board.Cells;
 }
 
 #pragma region | Public methods |
@@ -217,7 +182,7 @@ void Core::PrintHelp(void)
 void Core::StartGame(void)
 {
 	char pressedkey = '.';
-	bool helpshown = false, onlyselect = false;
+	bool helpshown = false, onlyselect = true;
 	Core* core = Core::GetInstance();
 	core->DrawBoard();
 	MoveEffect effect = Success;
@@ -267,21 +232,6 @@ void Core::StartGame(void)
 				effect = core->_workers[core->_selectedWorker].Move(Down, core->_board, core->_chests);
 				break;
 			}
-			//if (effect)
-			//{
-			//	System::Console::Clear();
-			//	core->DrawBoard();
-			//	if (core->_workers[core->_selectedWorker].Energy > 0)
-			//		printf("Your selected omni has now %d energy points left.",
-			//			core->_workers[core->_selectedWorker].Energy);
-			//	else if (core->_workers[core->_selectedWorker].Energy == 0)
-			//	{
-			//		std::cout << "Your selected omni is exhausted (has no energy points left)!\n"<<
-			//			"Leave him alone... Select another worker.\n";
-			//		onlyselect = true;
-			//	}
-			//}
-			//std::cout << print;
 			// react to movement effect
 			switch (effect)
 			{
@@ -328,6 +278,7 @@ void Core::StartGame(void)
 				{
 					System::Console::Clear();
 					core->DrawBoard();
+					System::Console::GetInstance()->SetTitle("Congratulations!");
 					printf("Congrats! You've got a treasure!\nThere's only %d left!\n", core->_treasuresNum);
 					if (core->_workers[core->_selectedWorker].Energy > 0)
 						printf("Your selected omni has now %d energy points left.",

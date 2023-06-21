@@ -7,7 +7,7 @@
 namespace Game
 {
 	/// <summary>
-	/// 
+	/// The worker.
 	/// </summary>
 	class Worker : public Object
 	{

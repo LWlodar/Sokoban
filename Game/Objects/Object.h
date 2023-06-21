@@ -12,6 +12,9 @@ namespace Game
 		Up, Down, Left, Right
 	};
 
+	/// <summary>
+	/// Effect of the movement.
+	/// </summary>
 	enum MoveEffect
 	{
 		// success

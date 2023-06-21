@@ -34,9 +34,6 @@
     <Filter Include="Level files">
       <UniqueIdentifier>{1084ec3e-c436-45e7-96d6-44495eadc4c5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Extensions">
-      <UniqueIdentifier>{95a3a1e0-886a-4369-82da-81f229433ffe}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Sokoban.cpp">

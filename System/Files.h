@@ -4,7 +4,7 @@
 namespace System
 {
 	/// <summary>
-	/// 
+	/// Level files reading class.
 	/// </summary>
 	class Files
 	{
